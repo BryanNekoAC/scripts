@@ -42,11 +42,11 @@ xrandr $usr_choice
 #$wall
 
 
-#xdotool key "super+shift+r"
-
 killall compton
 
-i3-msg restart
+xdotool key "super+shift+r"
+
+#i3-msg restart
 
 echo "Listo"
 
