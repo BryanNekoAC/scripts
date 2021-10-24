@@ -1,7 +1,5 @@
 #!/bin/bash
 
-now=`date`
-
 current_state=$(cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor | sort -u)
 
 aviable_states=$(cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors | sort -u)
@@ -21,8 +19,6 @@ echo "Lista de estados:
 5- performance 
 6- schedutil"
 
-
-
 read -p "Introduce el estado que desea configurar: " choice
 
 usr_choice=''
@@ -36,13 +32,10 @@ case $choice in
 6) usr_choice="schedutil";;
 esac
 
-
 echo $usr_choice | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 
 current_state=$(cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor | sort -u)
 
 echo "El estado fue configurado a: $current_state"
-
-echo "Set power state fue ejecutado en: $now/" >> $HOME/.shlogs.txt
 
 exit 0

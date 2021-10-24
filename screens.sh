@@ -34,13 +34,12 @@ case $choice in
 3) usr_choice="$xedp$xvga$hdmi$primary";;
 4) usr_choice="$edp$primary$vga$rofedp$xhdmi";;
 5) usr_choice="$edp$primary$xvga$hdmi$lofedp";;
-6) usr_choice="$edp$primary$vga$rofedp$hdmi$loedp";;
+6) usr_choice="$edp$primary$vga$rofedp$hdmi$lofedp";;
 esac
 
 xrandr $usr_choice
 
 #$wall
-
 
 killall compton
 
