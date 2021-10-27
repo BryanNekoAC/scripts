@@ -41,7 +41,8 @@ xrandr $usr_choice
 
 #$wall
 
-killall compton
+#killall compton
+killall picom
 
 xdotool key "super+shift+r"
 
