@@ -22,7 +22,7 @@ echo "1- eDP (only)
 3- HDMI (only) 
 4- eDP + VGA 
 5- eDP + HDM1 
-6- eDP + VGA + HDMI"
+6- eDP + HMDI + VGA"
 
 read -p "Introduce el estado que desea configurar: " choice
 
