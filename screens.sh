@@ -29,12 +29,12 @@ read -p "Introduce el estado que desea configurar: " choice
 usr_choice=''
 
 case $choice in 
-1) usr_choice="$edp$primary$xvga$xhdmi";;
-2) usr_choice="$xedp$vga$primary$xhdmi";;
-3) usr_choice="$xedp$xvga$hdmi$primary";;
-4) usr_choice="$edp$primary$vga$rofedp$xhdmi";;
-5) usr_choice="$edp$primary$xvga$hdmi$lofedp";;
-6) usr_choice="$edp$primary$vga$rofedp$hdmi$lofedp";;
+1) usr_choice="$edp$primary$xhdmi$xvga";;
+2) usr_choice="$xedp$xhdmi$vga$primary";;
+3) usr_choice="$xedp$hdmi$primary$xvga";;
+4) usr_choice="$edp$primary$xhdmi$vga$rofedp";;
+5) usr_choice="$edp$primary$hdmi$lofedp$xvga";;
+6) usr_choice="$edp$primary$hdmi$lofedp$vga$rofedp";;
 esac
 
 xrandr $usr_choice
