@@ -41,25 +41,24 @@ else:
         os.system("maim -u -q -b 2 -s -n -m 2 -c 0.3,0.9,0.6 | xclip -selection clipboard -t image/png")
     # if the parameter is 2, take a screenshot of entire screen
     elif sys.argv[1] == "2":
-        # get the geometry of the monitor where the mouse is located, store only the HEIGHT=, WIDTH=, X= and Y= values to the output to pass to maim as the argument -g like (-g "MONWxMONH+MONX+MONY") use simple colision test
         # get the mouse location
-        mouse = os.popen("xdotool getmouselocation").read()
+        xmouse = os.popen("xdotool getmouselocation | awk -F '[: ]' '{print $2}'").read()
+        ymouse = os.popen("xdotool getmouselocation | awk -F '[: ]' '{print $4}'").read()
         # get the geometry of the monitor where the mouse is located
-        monitor = os.popen("xrandr | grep -w connected | grep -w primary | awk '{print $4}'").read()
-        # get the geometry of the monitor where the mouse is located, store only the HEIGHT=, WIDTH=, X= and Y= values to the output to pass to maim as the argument -g like (-g "MONWxMONH+MONX+MONY")
-        # get the HEIGHT= value
-        height = monitor.split("x")[0]
-        # get the WIDTH= value
-        width = monitor.split("x")[1].split("+")[0]
-        # get the X= value
-        x = monitor.split("x")[1].split("+")[1]
-        # get the Y= value
-        y = monitor.split("x")[1].split("+")[2]
-        # store a string with the HEIGHT=, WIDTH=, X= and Y= values to pass to maim as the argument -g like (-g "MONWxMONH+MONX+MONY"), remove all breaklines
-        geometry = height + "x" + width + "+" + x + "+" + y
-        geometry = geometry.replace("\n", "")
+        monitors = os.popen("xrandr | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*'").read()
+        for mon in monitors.split():
+            monw = mon.split("x")[0]
+            monh = mon.split("x")[1].split("+")[0]
+            monx = mon.split("x")[1].split("+")[1]
+            mony = mon.split("x")[1].split("+")[2]
+            # use a simple collision check
+            if int(xmouse) >= int(monx):
+                if int(xmouse) <= int(monx) + int(monw):
+                    if int(ymouse) >= int(mony):
+                        if int(ymouse) <= int(mony) + int(monh):
+                            # we have found our monitor!
+                            os.system("maim -u -B -m 2 -g " + monw + "x" + monh + "+" + monx + "+" + mony + " " + home + "/Pictures/screenshots/Screenshot_$(date '+%F_%T').png")
         # take a screenshot of entire screen and store in the $home/Pictures/screenshots directory with the name of the date and time
-        os.system("maim -u -B -m 2 -g " + geometry + " " + home + "/Pictures/screenshots/Screenshot_$(date '+%F_%T').png")
     # if the parameter is 3, take a screenshot of all screens
     elif sys.argv[1] == "3":
         # take a screenshot of all screens and store in the $home/Pictures/screenshots directory with the name of the date and time
