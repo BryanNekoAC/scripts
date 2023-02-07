@@ -77,3 +77,7 @@ elif hostname == "DC-BR":
 else:
     print("Hostname not found")
     sys.exit(0)
+
+# simulate the key combination Win+Shift+r to reload the wm configuration
+os.system("xdotool keydown Super_L keydown Shift_L key r keyup Shift_L keyup Super_L")
+sys.exit(0)
