@@ -52,11 +52,11 @@ if hostname == "node":
         sys.exit(0)
 elif hostname == "DC-BR":
     primary = " --primary"
-    edp = " --output eDP1 --mode 1366x768"
-    hdmi = " --output HDMI1 --mode 1920x1080 --rate 144.00"
-    xedp = " --output eDP1 --off"
-    xhdmi = " --output HDMI1 --off"
-    loedp = " --left-of eDP1"
+    edp = " --output eDP-1 --mode 1366x768"
+    hdmi = " --output HDMI-1 --mode 1920x1080 --rate 144.00"
+    xedp = " --output eDP-1 --off"
+    xhdmi = " --output HDMI-1 --off"
+    loedp = " --left-of eDP-1"
     message = "1- eDP (only)\n2- HDMI (only)\n3- eDP + HDMI"
     if len(sys.argv) == 1:
         print(message)
